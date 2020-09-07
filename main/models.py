@@ -5,7 +5,7 @@ class Customer(models.Model):
     name = models.CharField(max_length=30)
     surname = models.CharField(max_length=30)
     email = models.EmailField()
-    phonenumber = models.IntegerField()
+    phonenumber = models.CharField(max_length=15)
 
 
 class Carwash(models.Model):
