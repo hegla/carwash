@@ -6,6 +6,7 @@ class Customer(models.Model):
     surname = models.CharField(max_length=30)
     email = models.EmailField()
     phonenumber = models.CharField(max_length=15)
+    carwashes = models.ManyToManyField('Carwash', through='Order')
 
 
 class Carwash(models.Model):

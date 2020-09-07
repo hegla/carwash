@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from django.views.generic import DetailView
+from main import models as models
 
-# Create your views here.
+
+class CustomerDetailView(DetailView):
+    model = models.Customer
+    template_name = 'customer.html'
