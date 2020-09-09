@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Customer(models.Model):
@@ -8,12 +9,15 @@ class Customer(models.Model):
     phonenumber = models.CharField(max_length=15)
     carwashes = models.ManyToManyField('Carwash', through='Order')
 
+    def get_absolute_url(self):
+        return reverse('main:customer', args=(self.pk,))
+
 
 class Carwash(models.Model):
     name = models.CharField(max_length=30)
     foundation_date = models.DateField()
     email = models.EmailField()
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to='LectorImages')
     website = models.URLField()
 
 

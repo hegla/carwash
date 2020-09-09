@@ -12,7 +12,8 @@ class CustomerListView(ListView):
 class CustomerCreateView(CreateView):
     model = models.Customer
     template_name = "customer/create.html"
-    fields = ('name', 'surname', 'email', 'phonenumber', )
+    form_class = forms.CustomerForm
+
     success_url = reverse_lazy('main:customers')
 
 
@@ -24,7 +25,7 @@ class CustomerDetailView(DetailView):
 class CustomerUpdateView(UpdateView):
     model = models.Customer
     template_name = "customer/update.html"
-    fields = ('name', 'surname', 'email', 'phonenumber', )
+    form_class = forms.CustomerForm
     success_url = reverse_lazy('main:customers')
 
 
