@@ -1,13 +1,35 @@
-from django.shortcuts import render
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from main import models as models
-
-
-class CustomerDetailView(DetailView):
-    model = models.Customer
-    template_name = 'customer.html'
+from main import forms as forms
+from django.urls import reverse_lazy
 
 
 class CustomerListView(ListView):
     model = models.Customer
-    template_name = 'customers.html'
+    template_name = "customer/customers.html"
+
+
+class CustomerCreateView(CreateView):
+    model = models.Customer
+    template_name = "customer/create.html"
+    fields = ('name', 'surname', 'email', 'phonenumber', )
+    success_url = reverse_lazy('main:customers')
+
+
+class CustomerDetailView(DetailView):
+    model = models.Customer
+    template_name = "customer/details.html"
+
+
+class CustomerUpdateView(UpdateView):
+    model = models.Customer
+    template_name = "customer/update.html"
+    fields = ('name', 'surname', 'email', 'phonenumber', )
+    success_url = reverse_lazy('main:customers')
+
+
+class CustomerDeleteView(DeleteView):
+    model = models.Customer
+    template_name = "customer/delete.html"
+    success_url = reverse_lazy('main:customers')
+
