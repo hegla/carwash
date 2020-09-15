@@ -6,6 +6,9 @@ from api import views
 
 router = routers.DefaultRouter()
 router.register('customers', views.CustomerViewSet)
+router.register('carwashes', views.CarwashViewSet)
+router.register('orders', views.OrderViewSet)
+
 
 urlpatterns = [
     path('', include(router.urls)),
