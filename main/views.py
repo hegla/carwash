@@ -34,3 +34,35 @@ class CustomerDeleteView(DeleteView):
     template_name = "customer/delete.html"
     success_url = reverse_lazy('main:customers')
 
+
+class CarwashListView(ListView):
+    model = models.Carwash
+    template_name = "carwash/carwashes.html"
+
+
+class CarwashCreateView(CreateView):
+    model = models.Carwash
+    template_name = "carwash/create.html"
+    form_class = forms.CarwashForm
+
+    success_url = reverse_lazy('main:carwashes')
+
+
+class CarwashDetailView(DetailView):
+    model = models.Carwash
+    template_name = "carwash/details.html"
+
+
+class CarwashUpdateView(UpdateView):
+    model = models.Carwash
+    template_name = "carwash/update.html"
+    form_class = forms.CarwashForm
+    success_url = reverse_lazy('main:carwashes')
+
+
+class CarwashDeleteView(DeleteView):
+    model = models.Carwash
+    template_name = "carwash/delete.html"
+    success_url = reverse_lazy('main:carwashes')
+
+

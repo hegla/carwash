@@ -1,0 +1,27 @@
+{% extends "__base.html" %}
+
+{% block container %}
+<a class="btn btn-outline-secondary" href="{% url 'main:carwash-create' %}" role="button"> Create new </a>
+<table class="table">
+    <tr>
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Website</th>
+                <th></th><th></th><th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in object_list %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.website}}</td>
+                <td><a class="btn btn-outline-info" href="{% url 'main:carwash' i.pk %}" role="button"> Open </a></td>
+                <td><a class="btn btn-outline-primary" href="{% url 'main:carwash-update' i.pk %}" role="button"> Update </a></td>
+                <td><a class="btn btn-outline-danger" href="{% url 'main:carwash-delete' i.pk %}" role="button"> Delete </a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
+
+{% endblock %}

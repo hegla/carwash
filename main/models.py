@@ -17,7 +17,7 @@ class Carwash(models.Model):
     name = models.CharField(max_length=30)
     foundation_date = models.DateField()
     email = models.EmailField()
-    photo = models.ImageField(upload_to='LectorImages')
+    photo = models.ImageField(blank=True, upload_to='CarwashImages', null=True)
     website = models.URLField()
 
 
