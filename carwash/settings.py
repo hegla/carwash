@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'main',
     'api',
+    'mapbox_location_field',
 ]
+
+MAPBOX_KEY = "pk.eyJ1IjoiY2htZWxlIiwiYSI6ImNrZnR3ZXc3ZjBxdjIycW1ub2ZtYzhnbG4ifQ.GwmjSc-4rTiBloBCdNFvGw"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

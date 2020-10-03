@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from mapbox_location_field.models import LocationField
 
 
 class Customer(models.Model):
@@ -19,6 +20,7 @@ class Carwash(models.Model):
     email = models.EmailField()
     photo = models.ImageField(blank=True, upload_to='CarwashImages', null=True)
     website = models.URLField()
+    location = LocationField(blank=True, null=True, map_attrs={"center": (30.522366336674224, 50.45084688302083)})
 
 
 class Order(models.Model):

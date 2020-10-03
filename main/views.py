@@ -2,7 +2,7 @@ from django.views.generic import DetailView, ListView, CreateView, UpdateView, D
 from main import models as models
 from main import forms as forms
 from django.urls import reverse_lazy
-
+from .feature import getFeatureCollection
 
 class CustomerListView(ListView):
     model = models.Customer
@@ -39,6 +39,20 @@ class CarwashListView(ListView):
     model = models.Carwash
     template_name = "carwash/carwashes.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['geojson'] = getFeatureCollection(self.model)
+        return context
+
+class CarwashMapView(ListView):
+    model = models.Carwash
+    template_name = "carwash/map.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['geojson'] = getFeatureCollection(self.model)
+        print(context)
+        return context
 
 class CarwashCreateView(CreateView):
     model = models.Carwash
