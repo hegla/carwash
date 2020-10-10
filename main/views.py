@@ -1,8 +1,11 @@
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.http import Http404, HttpResponse
 from main import models as models
 from main import forms as forms
-from django.urls import reverse_lazy
 from .feature import getFeatureCollection
+import json
+
 
 class CustomerListView(ListView):
     model = models.Customer
@@ -80,3 +83,14 @@ class CarwashDeleteView(DeleteView):
     success_url = reverse_lazy('main:carwashes')
 
 
+def carwash_autocomplete(request):
+    if request.is_ajax():
+        name_part = request.GET['name_part']
+        print(request.GET)
+        data = models.Carwash.objects.filter(name__icontains=name_part)[:50]
+        res = [[i.name, str(reverse_lazy('main:carwash', args={i.id}))] for i in data]
+        
+        data = json.dumps(res)
+        return HttpResponse(data, "application/json")
+    else:
+        raise Http404
