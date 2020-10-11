@@ -1,10 +1,11 @@
+import json
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.http import Http404, HttpResponse
+from dal import autocomplete
 from main import models as models
 from main import forms as forms
 from .feature import getFeatureCollection
-import json
 
 
 class CustomerListView(ListView):
@@ -83,14 +84,59 @@ class CarwashDeleteView(DeleteView):
     success_url = reverse_lazy('main:carwashes')
 
 
+class OrderListView(ListView):
+    model = models.Order
+    template_name = "order/orders.html"
+
+
+class OrderDetailView(DetailView):
+    model = models.Order
+    template_name = "order/details.html"
+    success_url = reverse_lazy('main:orders')
+
+
+class OrderCreateView(CreateView):
+    model = models.Order
+    template_name = "order/create.html"
+    form_class = forms.OrderForm
+
+
 def carwash_autocomplete(request):
     if request.is_ajax():
         name_part = request.GET['name_part']
-        print(request.GET)
         data = models.Carwash.objects.filter(name__icontains=name_part)[:50]
         res = [[i.name, str(reverse_lazy('main:carwash', args={i.id}))] for i in data]
-        
         data = json.dumps(res)
         return HttpResponse(data, "application/json")
     else:
         raise Http404
+
+
+# def customer_form_autocomplete(request):
+#     if request.is_ajax():
+#         name_part = request.get['name_part']
+#         data = models.Customer.objects.filter(name__icontains=name_part)[:50]
+#         res = [i.name for i in data]
+#         return HttpResponse(data, "application/json")
+#     else:
+#         raise Http404
+
+
+class CustomerAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = models.Customer.objects.all()
+
+        if self.q:
+            qs = qs.filter(name_surname__icontains=self.q)
+
+        return qs
+
+
+class CarwashAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = models.Carwash.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+
+        return qs

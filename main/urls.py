@@ -3,6 +3,7 @@ from main import views as views
 
 
 app_name = 'main'
+
 urlpatterns = [
     path('customer/<int:pk>/', views.CustomerDetailView.as_view(), name='customer'),
     path('customers/', views.CustomerListView.as_view(), name='customers'),
@@ -16,4 +17,9 @@ urlpatterns = [
     path('carwash/<int:pk>/update/', views.CarwashUpdateView.as_view(), name='carwash-update'),
     path('carwash/<int:pk>/delete/', views.CarwashDeleteView.as_view(), name='carwash-delete'),
     path('carwashes/carwash-search/', views.carwash_autocomplete, name='carwash-search'),
+    path('orders/', views.OrderListView.as_view(), name='orders'),    
+    path('order/create/', views.OrderCreateView.as_view(), name='order-create'),
+    path('order/<int:pk>', views.OrderDetailView.as_view(), name='order'),
+    path('customer-autocomplete/', views.CustomerAutocomplete.as_view(), name='customer-autocomplete'),
+    path('carwash-autocomplete/', views.CarwashAutocomplete.as_view(), name='carwash-autocomplete'),
 ]

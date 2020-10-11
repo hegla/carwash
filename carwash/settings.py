@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'main',
     'api',
     'mapbox_location_field',
+    'dal',
+    'dal_select2',
 ]
 
 MAPBOX_KEY = "pk.eyJ1IjoiY2htZWxlIiwiYSI6ImNrZnR3ZXc3ZjBxdjIycW1ub2ZtYzhnbG4ifQ.GwmjSc-4rTiBloBCdNFvGw"

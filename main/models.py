@@ -4,14 +4,16 @@ from mapbox_location_field.models import LocationField
 
 
 class Customer(models.Model):
-    name = models.CharField(max_length=30)
-    surname = models.CharField(max_length=30)
+    name_surname = models.CharField(max_length=40)
     email = models.EmailField()
     phonenumber = models.CharField(max_length=15)
     carwashes = models.ManyToManyField('Carwash', through='Order')
 
     def get_absolute_url(self):
         return reverse('main:customer', args=(self.pk,))
+
+    def __str__(self):
+        return f'{self.name_surname}({self.id})'
 
 
 class Carwash(models.Model):
@@ -22,6 +24,8 @@ class Carwash(models.Model):
     website = models.URLField()
     location = LocationField(blank=True, null=True, map_attrs={"center": (30.522366336674224, 50.45084688302083)})
 
+    def __str__(self):
+        return f'{self.name}'
 
 class Order(models.Model):
     CAR_BODY = (
@@ -37,7 +41,6 @@ class Order(models.Model):
         ('Yes', 'Yes'),
         ('No', 'No'),
     )
-    order_number = models.CharField(max_length=10, primary_key=True)
     car_body = models.CharField(max_length=10, choices=CAR_BODY)
     interior_cleaning = models.CharField(max_length=10, choices=INTERIOR_CLEANING)
     order_date = models.DateField()
