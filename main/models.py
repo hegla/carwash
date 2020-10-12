@@ -46,3 +46,6 @@ class Order(models.Model):
     order_date = models.DateField()
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     carwash = models.ForeignKey(Carwash, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('main:order', args=(self.pk,))

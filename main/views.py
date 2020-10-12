@@ -91,7 +91,7 @@ class OrderListView(ListView):
 
 class OrderDetailView(DetailView):
     model = models.Order
-    template_name = "order/details.html"
+    template_name = "order/detail.html"
     success_url = reverse_lazy('main:orders')
 
 
@@ -99,6 +99,12 @@ class OrderCreateView(CreateView):
     model = models.Order
     template_name = "order/create.html"
     form_class = forms.OrderForm
+
+
+class OrderDeleteView(DeleteView):
+    model = models.Order
+    template_name = "order/delete.html"
+    success_url = reverse_lazy('main:orders')
 
 
 def carwash_autocomplete(request):

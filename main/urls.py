@@ -20,6 +20,7 @@ urlpatterns = [
     path('orders/', views.OrderListView.as_view(), name='orders'),    
     path('order/create/', views.OrderCreateView.as_view(), name='order-create'),
     path('order/<int:pk>', views.OrderDetailView.as_view(), name='order'),
+    path('order/<int:pk>/delete/', views.OrderDeleteView.as_view(), name='order-delete'),
     path('customer-autocomplete/', views.CustomerAutocomplete.as_view(), name='customer-autocomplete'),
     path('carwash-autocomplete/', views.CarwashAutocomplete.as_view(), name='carwash-autocomplete'),
 ]

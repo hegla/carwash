@@ -1,0 +1,25 @@
+{% extends "__base.html" %}
+{% block container %}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Order Details #{{object.id}}</h5>
+    </div>
+    <div class="card-body">
+    <dl class="row">
+      <dt class="col-sm-3">Carwash</dt>
+      <dd class="col-sm-9">{{ object.carwash }}</dd>
+      <dt class="col-sm-3">Customer</dt>
+      <dd class="col-sm-9">{{ object.customer }}</dd>
+      <dt class="col-sm-3">Order date</dt>
+      <dd class="col-sm-9">{{ object.order_date }}</dd>
+      <dt class="col-sm-3">Car body</dt>
+      <dd class="col-sm-9">{{ object.car_body }}</dd>
+      <dt class="col-sm-3">Interior cleaning</dt>
+      <dd class="col-sm-9">{{ object.interior_cleaning }}</dd>
+    </dl>
+
+    </div>
+</div>
+
+{% endblock %}
