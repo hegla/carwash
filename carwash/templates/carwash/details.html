@@ -4,22 +4,30 @@
 <div class="card">
     <div class="card-header">
         <h5 class="card-title">Carwash Details #{{object.id}}</h5>
+        <a class="btn btn-outline-primary" href="{% url 'main:carwash-update' object.id %}" role="button"> Update </a>
+        <a class="btn btn-outline-danger" href="{% url 'main:carwash-delete' object.id %}" role="button"> Delete </a>
     </div>
-    <div class="card-body">
-    <dl class="row">
-      <dt class="col-sm-3">Name</dt>
-      <dd class="col-sm-9">{{ object.name }}</dd>
-      <dt class="col-sm-3">Foundation date</dt>
-      <dd class="col-sm-9">{{ object.foundation_date }}</dd>
-      <dt class="col-sm-3">E-mail</dt>
-      <dd class="col-sm-9">{{ object.email }}</dd>
-      <dt class="col-sm-3">Website</dt>
-      <dd class="col-sm-9">{{ object.website }}</dd>
-    </dl>
+  <div class="card-body">
+    <div class="row align-items-center">
+      <div class="col-md-6 ml-auto mr-auto">
+        <dl class="row">
+          <dt class="col-sm-3">Name</dt>
+          <dd class="col-sm-9">{{ object.name }}</dd>
+          <dt class="col-sm-3">Foundation date</dt>
+          <dd class="col-sm-9">{{ object.foundation_date }}</dd>
+          <dt class="col-sm-3">E-mail</dt>
+          <dd class="col-sm-9">{{ object.email }}</dd>
+          <dt class="col-sm-3">Website</dt>
+          <dd class="col-sm-9">{{ object.website }}</dd>
+        </dl>
+      </div>
+      <div class="col-md-3 ml-auto mr-auto">
+        <img src="{{ object.photo.url }}" class="img-fluid"  >
+      </div>
     </div>
-
+  </div>
+    
 </div>
         
-  <img src="{{ object.photo.url }}">
 
 {% endblock %}

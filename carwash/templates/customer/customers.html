@@ -6,16 +6,14 @@
     <tr>
         <thead class="thead-light">
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Surname</th>
+                <th scope="col">Name and Surname</th>
                 <th></th><th></th><th></th>
             </tr>
         </thead>
         <tbody>
             {% for i in object_list %}
             <tr>
-                <td>{{i.name}}</td>
-                <td>{{i.surname}}</td>
+                <td>{{i.name_surname}}</td>
                 <td><a class="btn btn-outline-info" href="{{ i.get_absolute_url }}" role="button"> Open </a></td>
                 <td><a class="btn btn-outline-primary" href="{% url 'main:customer-update' i.pk %}" role="button"> Update </a></td>
                 <td><a class="btn btn-outline-danger" href="{% url 'main:customer-delete' i.pk %}" role="button"> Delete </a></td>
