@@ -38,6 +38,7 @@ function createTable(data){
     <thead class="thead-light">
       <tr>
         <th scope="col">Name</th>
+        <th></th>
       </tr>
     </thead>
     `
@@ -45,7 +46,8 @@ function createTable(data){
     while(i < data.length) {
         html += `
       <tr>
-        <td><a href="//${window.location.host}${data[i][1]}">${data[i][0]}</a></td>
+        <td>${data[i][0]}</td>
+        <td><a class="btn btn-outline-info" href="//${window.location.host}${data[i][1]}" role="button"> Open </a></td>
       </tr>
       `
       i++;
