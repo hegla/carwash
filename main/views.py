@@ -57,6 +57,7 @@ class CarwashMapView(ListView):
         context['geojson'] = getFeatureCollection(self.model)
         print(context)
         return context
+        
 
 class CarwashCreateView(CreateView):
     model = models.Carwash
@@ -87,6 +88,10 @@ class CarwashDeleteView(DeleteView):
 class OrderListView(ListView):
     model = models.Order
     template_name = "order/orders.html"
+
+class OrderChartView(ListView):
+    model = models.Order
+    template_name = "order/chart.html"
 
 
 class OrderDetailView(DetailView):

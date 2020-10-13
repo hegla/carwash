@@ -2,10 +2,10 @@
 {% block container %}
 
 <div class="card">
-    <div class="card-header">
-        <h5 class="card-title">Carwash Details #{{object.id}}</h5>
-        <a class="btn btn-outline-primary" href="{% url 'main:carwash-update' object.id %}" role="button"> Update </a>
-        <a class="btn btn-outline-danger" href="{% url 'main:carwash-delete' object.id %}" role="button"> Delete </a>
+    <div class="card-header row no-gutters">
+        <h5 class="card-title col-lg-3">Carwash Details #{{object.id}}</h5>
+        <a class="btn btn-outline-primary col-lg-1" href="{% url 'main:carwash-update' object.id %}" role="button"> Update </a>
+        <a class="btn btn-outline-danger col-lg-1" href="{% url 'main:carwash-delete' object.id %}" role="button"> Delete </a>
     </div>
   <div class="card-body">
     <div class="row align-items-center">
@@ -22,7 +22,7 @@
         </dl>
       </div>
       <div class="col-md-3 ml-auto mr-auto">
-        <img src="{{ object.photo.url }}" class="img-fluid"  >
+        <img src="{{ object.photo.url }}" class="img-fluid">
       </div>
     </div>
   </div>
