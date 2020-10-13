@@ -2,11 +2,15 @@
 {% load static %}
 {% block container %}
 <script src="{% static 'js/carwash_search.js' %}" type="text/javascript"></script>
-<div class="form-group bmd-form-group">
-  <label class="bmd-label-static" for="carwash_autocomplete_input">Пошук за назвою</label>
-  <input id="carwash_search_input" class="form-control" placeholder="Почніть вводити назву..." >
+<div class="row no-gutters">
+  <div class="col-lg-10 col align-self-end">
+    <label class="bmd-label-static" for="carwash_autocomplete_input">Пошук за назвою</label>
+    <input id="carwash_search_input" class="form-control" placeholder="Почніть вводити назву..." >
+  </div>
+    <div class="col-lg-2 col align-self-end">
+    <a class="btn btn-outline-secondary w-100" href="{% url 'main:carwash-create' %}" role="button"> Створити нову </a>
+  </div>
 </div>
-<a class="btn btn-outline-secondary" href="{% url 'main:carwash-create' %}" role="button"> Створити нову </a>
 <table class="table" id="list"></table>
 
 {% endblock %}
