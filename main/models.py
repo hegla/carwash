@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from mapbox_location_field.models import LocationField
+import datetime as dt
 
 
 class Customer(models.Model):
@@ -27,6 +28,13 @@ class Carwash(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+    def get_order_stats(self):
+        """returns number of orders for each day of last week from now as iterator"""
+        return (Order.objects.filter(carwash=self)
+            .filter(order_date=dt.datetime.now()-dt.timedelta(days=i))
+            .count() 
+            for i in range(6, -1, -1))
+
 class Order(models.Model):
     CAR_BODY = (
         ('Sedan', 'Sedan'),
@@ -46,6 +54,3 @@ class Order(models.Model):
     order_date = models.DateField()
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     carwash = models.ForeignKey(Carwash, on_delete=models.CASCADE)
-
-    def get_absolute_url(self):
-        return reverse('main:order', args=(self.pk,))
