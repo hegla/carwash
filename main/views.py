@@ -104,6 +104,7 @@ class OrderCreateView(CreateView):
     model = models.Order
     template_name = "order/create.html"
     form_class = forms.OrderForm
+    success_url = reverse_lazy('main:orders')
 
 
 class OrderDeleteView(DeleteView):
