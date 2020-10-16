@@ -5,6 +5,13 @@
  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
+   <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <style type="text/css">
+	.highchart {
+    width: 500px;
+    height: 200px;
+	}
+  </style>
  <div id="mapid" style="height:800px"></div>
  <script>
 
@@ -24,8 +31,68 @@
 var geojsonCollection = {{geojson | safe}}
 
 function onEachFeature(feature, layer) {
-    
-        layer.bindPopup("Information");
+
+    var div = L.DomUtil.create('div', 'highchart');
+    layer.bindPopup(div);
+
+	layer.on('popupopen', function (e) {
+
+        console.log(e.target);
+        console.log(e.target.feature);
+        console.log(e.popup);
+        console.log(e.popup.getContent());
+
+        Highcharts.chart(e.popup.getContent(), {
+				chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Daily orders'
+    },
+    xAxis: {
+        categories: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Rainfall (mm)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Tokyo',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+
+    }]
+			});
+        });
 }
 
 {% comment %} alert({{geojson}}); {% endcomment %}
