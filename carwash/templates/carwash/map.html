@@ -23,9 +23,14 @@
 
 var geojsonCollection = {{geojson | safe}}
 
-
+function onEachFeature(feature, layer) {
+    
+        layer.bindPopup("Information");
+}
 
 {% comment %} alert({{geojson}}); {% endcomment %}
-L.geoJSON(geojsonCollection).addTo(mymap);
+L.geoJSON(geojsonCollection, {
+    onEachFeature: onEachFeature
+}).addTo(mymap);
 
  </script>

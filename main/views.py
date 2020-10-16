@@ -89,10 +89,6 @@ class OrderListView(ListView):
     model = models.Order
     template_name = "order/orders.html"
 
-class OrderChartView(ListView):
-    model = models.Order
-    template_name = "order/chart.html"
-
 
 class OrderDetailView(DetailView):
     model = models.Order
