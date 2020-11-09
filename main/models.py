@@ -30,10 +30,10 @@ class Carwash(models.Model):
 
     def get_order_stats(self):
         """returns number of orders for each day of last week from now as iterator"""
-        return (Order.objects.filter(carwash=self)
+        return [Order.objects.filter(carwash=self)
             .filter(order_date=dt.datetime.now()-dt.timedelta(days=i))
             .count() 
-            for i in range(6, -1, -1))
+            for i in range(6, -1, -1)]
 
 class Order(models.Model):
     CAR_BODY = (
