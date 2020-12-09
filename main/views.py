@@ -55,7 +55,6 @@ class CarwashMapView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['geojson'] = getFeatureCollection(self.model)
-        print(context)
         return context
         
 
@@ -120,6 +119,14 @@ def carwash_autocomplete(request):
         raise Http404
 
 
+def map_data(request, pk):
+    # if request.is_ajax():
+    data = models.Carwash.objects.get(id=pk).get_order_stats()
+    return HttpResponse(json.dumps(data), "application/json")
+    # else:
+    #     raise Http404
+
+
 # def customer_form_autocomplete(request):
 #     if request.is_ajax():
 #         name_part = request.get['name_part']
@@ -148,3 +155,4 @@ class CarwashAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(name__icontains=self.q)
 
         return qs
+

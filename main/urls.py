@@ -23,4 +23,5 @@ urlpatterns = [
     path('order/<int:pk>/delete/', views.OrderDeleteView.as_view(), name='order-delete'),
     path('customer-autocomplete/', views.CustomerAutocomplete.as_view(), name='customer-autocomplete'),
     path('carwash-autocomplete/', views.CarwashAutocomplete.as_view(), name='carwash-autocomplete'),
+    path('map_data/<int:pk>/', views.map_data, name='map-data'),
 ]
