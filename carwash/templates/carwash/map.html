@@ -38,7 +38,7 @@ function onEachFeature(feature, layer) {
 
 
 	layer.on('popupopen', e => {
-        const url = 'http://127.0.0.1:8000/map_data/' + feature.id + '/';
+        const url = 'http://' + window.location.host + '/map_data/' + feature.id + '/';
         fetch(url)
             .then(response => {
                 return response.json();
@@ -55,7 +55,6 @@ function onEachFeature(feature, layer) {
     });
 }
 
-{% comment %} alert({{geojson}}); {% endcomment %}
 L.geoJSON(geojsonCollection, {
     onEachFeature: onEachFeature
 }).addTo(mymap);

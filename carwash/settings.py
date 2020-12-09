@@ -45,11 +45,27 @@ INSTALLED_APPS = [
     'mapbox_location_field',
     'dal',
     'dal_select2',
+    'corsheaders',
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    
+    'rest_auth',
+    'rest_auth.registration',
 ]
+
+
+SITE_ID = 1
 
 MAPBOX_KEY = "pk.eyJ1IjoiY2htZWxlIiwiYSI6ImNrZnR3ZXc3ZjBxdjIycW1ub2ZtYzhnbG4ifQ.GwmjSc-4rTiBloBCdNFvGw"
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,6 +74,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://192.168.1.:3000"
+# ]
 
 ROOT_URLCONF = 'carwash.urls'
 
@@ -92,6 +114,19 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.TokenAuthentication',
+   ),
+   'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAdminUser'
+   ),
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
